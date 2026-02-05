@@ -19,7 +19,8 @@ const employees = [
                 "taskTitle": "Update website",
                 "taskDescription": "Revamp the homepage design",
                 "taskDate": "2024-10-12",
-                "category": "Design" 
+                "category": "Design",
+                "createdBy": "Admin" // ✅ Added createdBy field
             },
             {
                 "active": false,
@@ -29,7 +30,8 @@ const employees = [
                 "taskTitle": "Client meeting",
                 "taskDescription": "Discuss project requirements",
                 "taskDate": "2024-10-10",
-                "category": "Meeting"
+                "category": "Meeting",
+                "createdBy": "Admin" // ✅ Added createdBy field
             },
             {
                 "active": true,
@@ -39,7 +41,8 @@ const employees = [
                 "taskTitle": "Fix bugs",
                 "taskDescription": "Resolve bugs reported in issue tracker",
                 "taskDate": "2024-10-14",
-                "category": "Development"
+                "category": "Development",
+                "createdBy": "Admin" // ✅ Added createdBy field
             }
         ]
     },
@@ -63,7 +66,8 @@ const employees = [
                 "taskTitle": "Database optimization",
                 "taskDescription": "Optimize queries for better performance",
                 "taskDate": "2024-10-11",
-                "category": "Database"
+                "category": "Database",
+                "createdBy": "Admin" // ✅ Added createdBy field
             },
             {
                 "active": false,
@@ -73,7 +77,8 @@ const employees = [
                 "taskTitle": "Design new feature",
                 "taskDescription": "Create mockups for the new feature",
                 "taskDate": "2024-10-09",
-                "category": "Design"
+                "category": "Design",
+                "createdBy": "Admin" // ✅ Added createdBy field
             }
         ]
     },
@@ -97,7 +102,8 @@ const employees = [
                 "taskTitle": "Prepare presentation",
                 "taskDescription": "Prepare slides for upcoming client presentation",
                 "taskDate": "2024-10-13",
-                "category": "Presentation"
+                "category": "Presentation",
+                "createdBy": "Admin" // ✅ Added createdBy field
             },
             {
                 "active": true,
@@ -107,7 +113,8 @@ const employees = [
                 "taskTitle": "Code review",
                 "taskDescription": "Review the codebase for optimization",
                 "taskDate": "2024-10-12",
-                "category": "Development"
+                "category": "Development",
+                "createdBy": "Admin" // ✅ Added createdBy field
             },
             {
                 "active": false,
@@ -117,7 +124,8 @@ const employees = [
                 "taskTitle": "Testing",
                 "taskDescription": "Test the latest build for bugs",
                 "taskDate": "2024-10-08",
-                "category": "QA"
+                "category": "QA",
+                "createdBy": "Admin" // ✅ Added createdBy field
             }
         ]
     },
@@ -141,7 +149,8 @@ const employees = [
                 "taskTitle": "Write documentation",
                 "taskDescription": "Update the project documentation",
                 "taskDate": "2024-10-13",
-                "category": "Documentation"
+                "category": "Documentation",
+                "createdBy": "Admin" // ✅ Added createdBy field
             },
             {
                 "active": true,
@@ -151,7 +160,8 @@ const employees = [
                 "taskTitle": "Set up CI/CD",
                 "taskDescription": "Implement continuous integration pipeline",
                 "taskDate": "2024-10-11",
-                "category": "DevOps"
+                "category": "DevOps",
+                "createdBy": "Admin" // ✅ Added createdBy field
             }
         ]
     },
@@ -175,7 +185,8 @@ const employees = [
                 "taskTitle": "UI redesign",
                 "taskDescription": "Redesign the user interface for better UX",
                 "taskDate": "2024-10-14",
-                "category": "Design"
+                "category": "Design",
+                "createdBy": "Admin" // ✅ Added createdBy field
             },
             {
                 "active": false,
@@ -185,7 +196,8 @@ const employees = [
                 "taskTitle": "Deploy new build",
                 "taskDescription": "Deploy the latest build to production",
                 "taskDate": "2024-10-09",
-                "category": "DevOps"
+                "category": "DevOps",
+                "createdBy": "Admin" // ✅ Added createdBy field
             },
             {
                 "active": true,
@@ -195,7 +207,8 @@ const employees = [
                 "taskTitle": "Client feedback",
                 "taskDescription": "Gather feedback from clients after product launch",
                 "taskDate": "2024-10-12",
-                "category": "Support"
+                "category": "Support",
+                "createdBy": "Admin" // ✅ Added createdBy field
             }
         ]
     }
@@ -209,17 +222,14 @@ const admin = [{
 }];
 
 
-export const setLocalStorage=()=>{
-    localStorage.setItem("employees" ,JSON.stringify(employees))
+export const setLocalStorage = () => {
+    localStorage.setItem("employees", JSON.stringify(employees))
     localStorage.setItem("admin", JSON.stringify(admin))
 }
 
-export const getLocalStorage =()=>{
+export const getLocalStorage = () => {
     const employees = JSON.parse(localStorage.getItem("employees"))
     const admin = JSON.parse(localStorage.getItem("admin"))
 
-    console.log(employees);
-    
-    return {employees , admin}
-
+    return { employees, admin }
 }

@@ -1,34 +1,53 @@
-import React, { useContext, useState } from 'react'
-import Login from './components/Auth/Login.jsx'
-import  { useEffect } from 'react'
-import EmployeeDashboard from './components/Dashboard/EmployeeDashboard.jsx'
-import AdminDashboard from './components/Dashboard/AdminDashboard.jsx'
-import { getLocalStorage, setLocalStorage } from './utils/localStorage.jsx'
-import { AuthContext } from './context/AuthProvider.jsx'
+import React, { useContext, useEffect, useState } from 'react'
+import Login from './components/Auth/Login'
+import EmployeeDashboard from './components/Dashboard/EmployeeDashboard'
+import AdminDashboard from './components/Dashboard/AdminDashboard'
+import { AuthContext } from './context/AuthProvider'
+
 const App = () => {
-  const [user , setUser] = useState(null)
- const  handleLogin=(email,password)=>{
-    if(email==="admin@gmail.com" && password ==="123"){
-      setUser("admin")
+  const [user, setUser] = useState(null)
+  const [loggedInUserData, setLoggedInUserData] = useState(null)
+  const [userData, setUserData] = useContext(AuthContext)
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem('loggedInUser')
+    
+    if(loggedInUser){
+      const userData = JSON.parse(loggedInUser)
+      setUser(userData.role)
+      setLoggedInUserData(userData.data)
     }
-    else if(email==="user@gmail.com"&& password ==="123") {
-       setUser("user")
-      
-    }
-    else{
-      console.log("invaild");
-      
+  }, [])
+
+  const handleLogin = (email, password) => {
+    if (email === 'admin@example.com' && password === '123') {
+      setUser('admin')
+      localStorage.setItem('loggedInUser', JSON.stringify({ 
+        role: 'admin', 
+        data: { firstName: 'Admin', email: email } 
+      }))
+    } else if (userData) {
+      const employee = userData.find((e) => e.email === email && e.password === password)
+      if (employee) {
+        setUser('employee')
+        setLoggedInUserData(employee)
+        localStorage.setItem('loggedInUser', JSON.stringify({ 
+          role: 'employee', 
+          data: employee 
+        }))
+      } else {
+        alert("Invalid Credentials")
+      }
+    } else {
+      alert("Invalid Credentials")
     }
   }
 
-  const data = useContext(AuthContext);
-  console.log(data);
-  
-  
   return (
     <>
-    {!user?<Login handleLogin={handleLogin} />:'' }
-    {user === "admin" ? <AdminDashboard/> :<EmployeeDashboard/>}
+      {!user ? <Login handleLogin={handleLogin} /> : ''}
+      {user === 'admin' ? <AdminDashboard changeUser={setUser} /> : 
+       (user === 'employee' ? <EmployeeDashboard changeUser={setUser} data={loggedInUserData} /> : null)}
     </>
   )
 }

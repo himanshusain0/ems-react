@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react'
 
 const Login = ({handleLogin}) => {
@@ -14,8 +15,7 @@ const Login = ({handleLogin}) => {
         setEmail("")
         setPassword("")
     }
-    // console.log(email , password);
-    
+
 
   return (
     <div className='flex h-screen w-screen items-center justify-center'>
